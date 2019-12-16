@@ -34,7 +34,7 @@ class UserController {
     return userGames
 
   }
-  
+
 }
 
 module.exports = UserController

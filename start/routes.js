@@ -8,9 +8,14 @@ Route.resource('properties', 'PropertyController')
   .apiOnly()
   .middleware('auth')
 
+Route.get('/games/available','GamesController.getAvailableGames')
+Route.get('/games/available/ps4','GamesController.getAvailablePS4Games')
+Route.get('/games/available/xbox','GamesController.getAvailableXBOXGames')
+
 Route.get('/games','GamesController.showAll')
 //.middleware('auth')
 Route.post('/games/add','GamesController.addUserGame')
+Route.post('/games/rent','GamesController.rentGames')
 
 Route.get('user/:id','UserController.showUser')
 //.middleware('auth')
