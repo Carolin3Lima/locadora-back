@@ -10,6 +10,12 @@ Route.resource('properties', 'PropertyController')
 
 Route.get('/games','GamesController.showAll')
 //.middleware('auth')
+Route.post('/games/add','GamesController.addUserGame')
+
+Route.get('user/:id','UserController.showUser')
+//.middleware('auth')
+Route.post('/user/:id','UserController.show')
+Route.get('user/games/:id','UserController.getGames')
 
 
 Route.post('properties/:id/images', 'ImageController.store')
