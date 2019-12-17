@@ -21,7 +21,9 @@ Route.get('user/:id','UserController.showUser')
 //.middleware('auth')
 Route.post('/user/:id','UserController.show')
 Route.get('user/games/:id','UserController.getGames')
-
+Route.get('user/games/rented/:id','UserController.getRentedGames')
+Route.get('user/games/rented/ps4/:id','UserController.getRentedPS4Games')
+Route.get('user/games/rented/xbox/:id','UserController.getRentedXBOXGames')
 
 Route.post('properties/:id/images', 'ImageController.store')
 .middleware('auth')  

@@ -35,6 +35,24 @@ class UserController {
 
   }
 
+  async getRentedGames ({params}) {
+    const availableGames = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images').from('user_games').where({'renter_id':params.id}).innerJoin('games', 'user_games.game_id', 'games.id')
+    
+    return availableGames
+  }
+
+
+  async getRentedPS4Games ({params}) {
+    const availablePS4Games = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images').from('user_games').where({'renter_id':params.id,'console':'PS4'}).innerJoin('games', 'user_games.game_id', 'games.id')
+    return availablePS4Games
+  }
+
+  async getRentedXBOXGames ({params}) {
+
+    const RentedXBOXGames = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images').from('user_games').where({'renter_id':params.id,'console':'XBOX'}).innerJoin('games', 'user_games.game_id', 'games.id')
+    return RentedXBOXGames
+  }
+
 }
 
 module.exports = UserController
