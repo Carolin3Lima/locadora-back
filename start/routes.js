@@ -3,6 +3,8 @@
 const Route = use('Route')
 
 Route.post('/users', 'UserController.create')
+Route.post('/user/update', 'UserController.updateUser')
+
 Route.post('/sessions', 'SessionController.create')
 Route.resource('properties', 'PropertyController')
   .apiOnly()
@@ -16,6 +18,7 @@ Route.get('/games','GamesController.showAll')
 //.middleware('auth')
 Route.post('/games/add','GamesController.addUserGame')
 Route.post('/games/rent','GamesController.rentGames')
+Route.delete('/games/delete/:id','GamesController.deleteGames')
 
 Route.get('user/:id','UserController.showUser')
 //.middleware('auth')

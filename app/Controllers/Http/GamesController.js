@@ -36,21 +36,23 @@ class GamesController {
    */
 
   async getAvailableGames (request, response) {
-    const availableGames = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images').from('user_games').where({'available':1}).innerJoin('games', 'user_games.game_id', 'games.id')
+    const availableGames = await Database.select('user_games.id','user_id','game_id','available','user_games.region','time','console','offline','online','genre','images','games.name').from('user_games').where({'available':1}).innerJoin('games', 'user_games.game_id', 'games.id')
     
     return availableGames
   }
 
 
   async getAvailablePS4Games (request, response) {
-    const availablePS4Games = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images').from('user_games').where({'available':1,'console':'PS4'}).innerJoin('games', 'user_games.game_id', 'games.id')
+    const availablePS4Games = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images','games.name').from('user_games').where({'available':1,'console':'PS4'}).innerJoin('games', 'user_games.game_id', 'games.id')
     return availablePS4Games
   }
 
   async getAvailableXBOXGames (request, response) {
-    const AvailableXBOXGames = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images').from('user_games').where({'available':1,'console':'XBOX'}).innerJoin('games', 'user_games.game_id', 'games.id')
+    const AvailableXBOXGames = await Database.select('user_games.id','user_id','game_id','available','region','time','console','offline','online','genre','images','games.name').from('user_games').where({'available':1,'console':'XBOX'}).innerJoin('games', 'user_games.game_id', 'games.id')
     return AvailableXBOXGames
   }
+
+  
 
   async rentGames ({request, response}) {
     const data = request.only([
@@ -65,6 +67,16 @@ class GamesController {
     
     return rentedGame
   }
+
+  async deleteGames ({params}) {
+    const affectedRows = await Database
+    .table('user_games')
+    .where('id',params.id)
+    .delete()
+    return affectedRows
+  }
+
+  
 
  /**
    * Create/save a new property.
@@ -82,9 +94,7 @@ class GamesController {
       'available',
       'region',
       'time',
-      'price'
     ])
-    console.log(data)
   
     const userGame = await UserGames.create({ ...data })
   
